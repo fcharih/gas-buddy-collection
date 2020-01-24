@@ -2,7 +2,7 @@ import sys
 import json
 
 def to_json(link):
-    return { "seedUrl": link , "instantStreetViewUrl": "" , "googleMapsUrl": ""}
+    return { "seedUrl": link }
 
 links = [link.rstrip("\n") for link in open(sys.argv[1]).readlines()]
 links_json = [to_json(link) for link in links]

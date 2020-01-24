@@ -141,7 +141,7 @@ ipc.handle("link-requested", async (event, arg) => {
 let data = JSON.parse(fs.readFileSync(dataFile));
 
 const entries = Object.entries(data);
-const incomplete = entries.filter((x) => x[1].instantStreetViewUrl === "")
+const incomplete = entries.filter((x) => !x[1].instantStreetViewUrl)
 const index = incomplete[0][0];
 	return {
 		data,
