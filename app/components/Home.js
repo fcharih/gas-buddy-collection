@@ -53,7 +53,14 @@ export default class Home extends Component<Props> {
 		if(this.state.stationIndex !== this.state.data[this.state.index].nearbyStations.results.length - 1) {
 		  this.setState({ stationIndex: this.state.stationIndex + 1 })
 		} else {
-			await this.setState({ stationIndex: 0, index: `${parseInt(this.state.index) + 1}` });
+			let index;
+			for(let i = parseInt(this.state.index) + 1; i < Object.keys(this.state.data); i++) {
+				if (this.state.data[i].nearbyStations.results.length > 0) {
+					index = i;
+					break;
+				}
+			}
+			await this.setState({ stationIndex: 0, index: `${index}` });
 		}
 	}
 
@@ -66,7 +73,14 @@ export default class Home extends Component<Props> {
 		if(this.state.stationIndex !== this.state.data[this.state.index].nearbyStations.results.length - 1) {
 		  this.setState({ stationIndex: this.state.stationIndex + 1 })
 		} else {
-			await this.setState({ stationIndex: 0, index: `${parseInt(this.state.index) + 1}` });
+			let index;
+			for(let i = parseInt(this.state.index) + 1; i < Object.keys(this.state.data); i++) {
+				if (this.state.data[i].nearbyStations.results.length > 0) {
+					index = i;
+					break;
+				}
+			}
+			await this.setState({ stationIndex: 0, index: `${index}` });
 		}
 	}
 
@@ -81,7 +95,6 @@ export default class Home extends Component<Props> {
 		// Identify first empty photo
 		const index = 
 		Object.keys(this.state.data).filter((key) => this.state.data[key].nearbyStations.results.every(station => !station.gmapsLink))[0];
-		console.log("=>", index)
 		this.setState({ index });
 	}
 
