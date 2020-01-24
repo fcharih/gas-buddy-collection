@@ -137,30 +137,17 @@ app.on('activate', () => {
   if (mainWindow === null) createWindow();
 });
 
-ipc.handle("link-requested", async (event, arg) => {
-let data = JSON.parse(fs.readFileSync(dataFile));
-
-const entries = Object.entries(data);
-const incomplete = entries.filter((x) => !x[1].instantStreetViewUrl)
-const index = incomplete[0][0];
-	return {
-		data,
-		index
-	}
-})
-
 ipc.handle("select-file", async (event, filepath) => {
   dataFile = filepath;
 })
 
-ipc.handle("link-submitted", async (event, index, gmapslink, isvlink) => {
-  let data = JSON.parse(fs.readFileSync(dataFile));
-	data[index].googleMapsUrl = gmapslink;
-	data[index].instantStreetViewUrl = isvlink;
-	fs.writeFileSync(dataFile, JSON.stringify(data));
-	return;
+ipc.handle("get-data", async (event) => {
+	let data = JSON.parse(fs.readFileSync(dataFile));
+	return data;
 })
 
-ipc.handle("get-position", async (event) => {
-	return mainWindow.getPosition();
+ipc.handle("save-data", async (event, data) => {
+	fs.writeFileSync(dataFile, JSON.stringify(data));
+	let newData = JSON.parse(fs.readFileSync(dataFile));
+	return newData;
 })
