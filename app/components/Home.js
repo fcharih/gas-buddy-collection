@@ -48,7 +48,7 @@ export default class Home extends Component<Props> {
 				break;
 			}
 		}
-		this.setState({ index });
+		this.setState({ index, stationIndex: 0 });
 	}
 
 	seekPreviousSeed() {
@@ -59,7 +59,7 @@ export default class Home extends Component<Props> {
 				break;
 			}
 		}
-		this.setState({ index });
+		this.setState({ index, stationIndex: 0 });
 	}
 
 	seekNextStation() {
